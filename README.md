@@ -1,4 +1,13 @@
-# atividade-regiano
+# Atividade-Regiano
+
+# 👨‍💻 Autor
+
+Matheus Soares da Costa
+
+Matrícula: 2414290057
+
+#
+
 
 📘 Lista Ligada – Estrutura de Dados (JavaScript)
 
@@ -26,7 +35,3 @@ Contar alunos ativos
 
 Exibir a lista completa
 
-👨‍💻 Autor
-
-Matheus Soares da Costa
-Matrícula: 2414290057
