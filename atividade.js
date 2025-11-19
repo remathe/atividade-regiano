@@ -5,8 +5,8 @@ class Aluno {
         this.ativo = ativo;
     }
 
-    toString() {
-        return `${this.nome} - Nota: ${this.nota} - Ativo: ${this.ativo}`;
+    status() {
+        return this.ativo ? "A" : "I";
     }
 }
 
@@ -41,6 +41,7 @@ class ListaLigada {
         }
 
         this.length++;
+        console.log(`${element.nome} adicionado na posicao ${this.length}.`);
         return true;
     }
 
@@ -73,6 +74,7 @@ class ListaLigada {
         }
 
         this.length++;
+        console.log(`${element.nome} adicionado na posicao ${position + 1}.`);
         return true;
     }
 
@@ -87,7 +89,6 @@ class ListaLigada {
             index++;
             current = current.next;
         }
-
         return -1;
     }
 
@@ -106,6 +107,7 @@ class ListaLigada {
         }
 
         this.length--;
+        console.log(`${removed.element.nome} removido da posicao ${position + 1}.`);
         return removed.element;
     }
 
@@ -136,62 +138,49 @@ class ListaLigada {
         } while (swapped);
     }
 
-    total() {
-        return this.length;
-    }
+    mostrarTabela() {
+        console.log("Pos Aluno nota Status");
+        console.log("--- ------ ---- ------");
 
-    ativos() {
         let current = this.head;
-        let count = 0;
+        let index = 1;
 
         while (current) {
-            if (current.element.ativo) count++;
+            const nome = current.element.nome.padEnd(6);
+            const nota = current.element.nota.toFixed(1).padEnd(4);
+            const status = current.element.status();
+
+            console.log(`${index} ${nome} ${nota} ${status}`);
+            index++;
             current = current.next;
         }
 
-        return count;
-    }
-
-    mostrar() {
-        const arr = [];
-        let current = this.head;
-
-        while (current) {
-            arr.push(current.element);
-            current = current.next;
-        }
-
-        return arr;
-    }
-
-    toString() {
-        if (!this.head) return "";
-        let current = this.head;
-        let str = current.element.toString();
-
-        while (current.next) {
-            current = current.next;
-            str += " | " + current.element.toString();
-        }
-        return str;
+        console.log("");
     }
 }
 
+
+// -------------------------------
+// EXEMPLO EXATO DO PDF
+// -------------------------------
+
 const lista = new ListaLigada();
 
-lista.append(new Aluno("Matheus", 9.2));
-lista.append(new Aluno("João Vitor", 7.5));
-lista.append(new Aluno("Clifton", 8.8));
-lista.append(new Aluno("Pedro", 6.9, false));
+lista.append(new Aluno("Pedro", 8.9));
+lista.append(new Aluno("Ana", 8.7));
+lista.append(new Aluno("Maria", 9.3, false));
 
-console.log("Total:", lista.total());
-console.log("Ativos:", lista.ativos());
+console.log("");
+lista.mostrarTabela();
 
-lista.ordenarPorNota();
-console.log("Ordenados:", lista.mostrar());
+lista.remove("Pedro");
+lista.mostrarTabela();
 
-lista.remove("Bruno");
-console.log("Após excluir Bruno:", lista.mostrar());
+lista.insert(new Aluno("Paula", 9.1), 0);
+lista.mostrarTabela();
 
-console.log("Total:", lista.total());
-console.log("Ativos:", lista.ativos());
+lista.insert(new Aluno("Pedro", 8.2), 1);
+lista.append(new Aluno("Joao", 7.5));
+
+console.log("");
+lista.mostrarTabela();
